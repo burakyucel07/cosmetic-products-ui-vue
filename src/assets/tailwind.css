@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  a {
+    @apply text-slate-700;
+    @apply no-underline;
+  }
+  a:hover {
+    @apply text-slate-900;
+  }
+}
