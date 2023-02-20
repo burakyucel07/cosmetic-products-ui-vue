@@ -31,15 +31,15 @@ export default defineComponent({
         },
         {
           to: "/products/bath",
-          text: "All Products",
+          text: "Bath Products",
         },
         {
           to: "/products/body",
-          text: "All Products",
+          text: "Body Products",
         },
         {
           to: "/products/perfumes",
-          text: "All Products",
+          text: "Perfumes",
         },
         {
           to: "/about",
