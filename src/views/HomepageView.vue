@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-4xl mb-3">Cosmetic Shop</h1>
+  <MainTitle title="Cosmetic Shop" />
   <p class="text-lg mb-6">
     Cosmetic shop has a great variation of cosmetic products. Cleaning, scents,
     moisturizers, and more. Please don't hesitate to check our products.
@@ -20,50 +20,45 @@
     </div>
   </div>
 
-  <h1 class="text-4xl mb-3">Our Newly Added Products</h1>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-    <div>
-      <div
-        class="mx-3 my-3 bg-gradient-to-b from-white to-slate-300 rounded-lg py-4 px-4 h-80"
-      ></div>
-      <div class="text-center pb-4">
-        <h2 class="text-2xl">Cucumber Watermelon</h2>
-        <h5 class="text-lg">Shower Gel</h5>
-        <div class="text-bold text-3xl pt-1">$10.50</div>
-      </div>
-    </div>
-
-    <div>
-      <div
-        class="mx-3 my-3 bg-gradient-to-b from-white to-slate-300 rounded-lg py-4 px-4 h-80"
-      ></div>
-      <div class="text-center pb-4">
-        <h2 class="text-2xl">Cucumber Watermelon</h2>
-        <h5 class="text-lg">Shower Gel</h5>
-        <div class="text-bold text-3xl pt-1">$10.50</div>
-      </div>
-    </div>
-
-    <div>
-      <div
-        class="mx-3 my-3 bg-gradient-to-b from-white to-slate-300 rounded-lg py-4 px-4 h-80"
-      ></div>
-      <div class="text-center pb-4">
-        <h2 class="text-2xl">Cucumber Watermelon</h2>
-        <h5 class="text-lg">Shower Gel</h5>
-        <div class="text-bold text-3xl pt-1">$10.50</div>
-      </div>
-    </div>
-
-    <div>
-      <div
-        class="mx-3 my-3 bg-gradient-to-b from-white to-slate-300 rounded-lg py-4 px-4 h-80"
-      ></div>
-      <div class="text-center pb-4">
-        <h2 class="text-2xl">Cucumber Watermelon</h2>
-        <h5 class="text-lg">Shower Gel</h5>
-        <div class="text-bold text-3xl pt-1">$10.50</div>
-      </div>
-    </div>
-  </div>
+  <MainTitle title="Our Newly Added Products" />
+  <ProductGrid :items="items" />
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import MainTitle from "@/components/MainTitle.vue";
+import ProductGrid from "@/components/ProductGrid.vue";
+import axios from "axios";
+
+export default defineComponent({
+  name: "HomepageView",
+  components: {
+    MainTitle,
+    ProductGrid,
+  },
+  data() {
+    return {
+      items: [
+        {
+          description: "",
+          name: "",
+          type: "",
+          price: 0,
+          weight: 0,
+          ingredients: "",
+        },
+      ],
+    };
+  },
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/v1/products?pageNumber=0&pageSize=10`)
+      .then((response) => {
+        if (response.request.status === 200) {
+          const data = response.data;
+          this.items = data;
+        }
+      });
+  },
+});
+</script>
