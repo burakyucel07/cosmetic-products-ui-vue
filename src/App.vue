@@ -13,7 +13,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import MainNavigation from "@/components/MainNavigation.vue";
-import { RouterView } from "vue-router";
 import "./assets/tailwind.css";
 
 export default defineComponent({
